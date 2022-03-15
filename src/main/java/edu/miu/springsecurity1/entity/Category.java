@@ -1,5 +1,6 @@
 package edu.miu.springsecurity1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Category {
 
     private String name;
 
+    @JsonBackReference
     @ManyToMany
     private List<Product> products;
 }

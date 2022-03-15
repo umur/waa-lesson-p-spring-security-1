@@ -1,5 +1,6 @@
 package edu.miu.springsecurity1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,10 +20,11 @@ public class User {
     private String firstname;
     private String lastname;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "user")
     private Product product;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Role> roles;
 }

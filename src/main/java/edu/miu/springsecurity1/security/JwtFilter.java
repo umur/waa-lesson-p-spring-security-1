@@ -1,7 +1,5 @@
 package edu.miu.springsecurity1.security;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -52,9 +50,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                filterChain.doFilter(request, response);
             }
         }
-
+        filterChain.doFilter(request, response);
     }
 }

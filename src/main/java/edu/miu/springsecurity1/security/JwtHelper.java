@@ -8,7 +8,7 @@ import java.util.Date;
 @Component
 public class JwtHelper {
     private final String secret = "top-secret";
-    private final long expirataion = 5 * 60 * 60;
+    private final long expirataion = 5 * 60 * 60*60;
 
     public String generateToken(String email) {
         return Jwts.builder()
@@ -40,10 +40,16 @@ public class JwtHelper {
     }
 
     public String getUsernameFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(token)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        String result = null;
+        try {
+            result = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 }

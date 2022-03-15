@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@RequestMapping("/api/v1/uaa")
+@RequestMapping("/api/v1/uaa")
 public class UaaController {
 
     private AuthenticationManager authenticationManager;
@@ -30,10 +30,10 @@ public class UaaController {
         this.jwtHelper = jwtHelper;
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
-            authenticationManager.authenticate(
+         var result= authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(),
                             request.getPassword())
             );
