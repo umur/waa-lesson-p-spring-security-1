@@ -1,5 +1,6 @@
 package edu.miu.springsecurity1.security;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,7 +37,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
-            email = jwtHelper.getUsernameFromToken(token);
+            try{
+                email = jwtHelper.getUsernameFromToken(token);
+            }catch (ExpiredJwtException e){
+                String isRefreshToken = request.getHeader("isRefreshToken");
+            }
+
         }
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -49,9 +55,9 @@ public class JwtFilter extends OncePerRequestFilter {
                 // TODO ????
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }
