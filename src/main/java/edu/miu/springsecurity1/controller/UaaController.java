@@ -1,7 +1,10 @@
 package edu.miu.springsecurity1.controller;
 
+import edu.miu.springsecurity1.entity.Product;
 import edu.miu.springsecurity1.model.LoginRequest;
+import edu.miu.springsecurity1.repository.ProductRepo;
 import edu.miu.springsecurity1.security.JwtHelper;
+import edu.miu.springsecurity1.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,14 +13,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/uaa")
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin
 public class UaaController {
 
     private AuthenticationManager authenticationManager;
     private UserDetailsService userDetailsService;
     private JwtHelper jwtHelper;
+
+    private   ProductService productService;
 
     public UaaController(AuthenticationManager authenticationManager,
                          UserDetailsService userDetailsService,
