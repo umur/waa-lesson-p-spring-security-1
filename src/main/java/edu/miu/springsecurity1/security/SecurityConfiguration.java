@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -34,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/uaa").permitAll()
+                .antMatchers("/api/v1/uaa/**").permitAll()
                 .antMatchers("/api/v1/products").permitAll()
 //                .antMatchers("/api/v1/products").hasAuthority("CLIENT")
                 .anyRequest()
