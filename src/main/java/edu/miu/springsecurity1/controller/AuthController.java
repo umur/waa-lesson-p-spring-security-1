@@ -3,7 +3,7 @@ package edu.miu.springsecurity1.controller;
 import edu.miu.springsecurity1.entity.dto.request.LoginRequest;
 import edu.miu.springsecurity1.entity.dto.response.LoginResponse;
 import edu.miu.springsecurity1.entity.dto.request.RefreshTokenRequest;
-import edu.miu.springsecurity1.service.UaaService;
+import edu.miu.springsecurity1.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AuthController {
 
-    private final UaaService uaaService;
+    private final AuthService authService;
 
-    public AuthController(UaaService uaaService) {
-        this.uaaService = uaaService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        var loginResponse = uaaService.login(loginRequest);
+        var loginResponse = authService.login(loginRequest);
         return ResponseEntity.ok().body(loginResponse);
     }
 
     @PostMapping("/refreshToken")
     public LoginResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest){
-        return uaaService.refreshToken(refreshTokenRequest);
+        return authService.refreshToken(refreshTokenRequest);
     }
 
 }

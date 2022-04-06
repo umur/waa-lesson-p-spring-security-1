@@ -1,9 +1,11 @@
 package edu.miu.springsecurity1.util;
 
 import io.jsonwebtoken.*;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -12,9 +14,26 @@ public class JwtUtil {
     private final long expirataion = 5 * 60 * 60 * 60;
     // private final long expirataion = 5;
 
-    public String generateToken(String email) {
+    public String generateToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        return doGenerateToken(claims, userDetails.getUsername());
+    }
+
+
+    public String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setSubject(email)
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirataion))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+
+    // Overridden to accommodate the refresh token
+    public String doGenerateToken( String subject) {
+        return Jwts.builder()
+                .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirataion))
                 .signWith(SignatureAlgorithm.HS512, secret)
