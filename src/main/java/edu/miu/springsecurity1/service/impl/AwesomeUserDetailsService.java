@@ -1,7 +1,7 @@
-package edu.miu.springsecurity1.security;
+package edu.miu.springsecurity1.service.impl;
 
 import edu.miu.springsecurity1.repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.miu.springsecurity1.service.impl.AwesomeUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

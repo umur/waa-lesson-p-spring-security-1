@@ -1,4 +1,4 @@
-package edu.miu.springsecurity1.security;
+package edu.miu.springsecurity1.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.miu.springsecurity1.entity.Role;

@@ -1,5 +1,6 @@
-package edu.miu.springsecurity1.security;
+package edu.miu.springsecurity1.filter;
 
+import edu.miu.springsecurity1.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,11 +18,11 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtHelper jwtHelper;
+    private final JwtUtil jwtHelper;
 
     private final UserDetailsService userDetailsService;
 
-    public JwtFilter(JwtHelper jwtHelper, UserDetailsService userDetailsService) {
+    public JwtFilter(JwtUtil jwtHelper, UserDetailsService userDetailsService) {
         this.jwtHelper = jwtHelper;
         this.userDetailsService = userDetailsService;
     }
@@ -52,7 +53,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
 
-                // TODO ????
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

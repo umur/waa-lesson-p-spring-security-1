@@ -1,6 +1,8 @@
-package edu.miu.springsecurity1.security;
+package edu.miu.springsecurity1.config;
 
+import edu.miu.springsecurity1.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,12 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService awesomeUserDetailsService;
+    private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(awesomeUserDetailsService);
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -33,9 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/uaa/**").permitAll()
-                .antMatchers("/api/v1/products").permitAll()
-//                .antMatchers("/api/v1/products").hasAuthority("CLIENT")
+                .antMatchers("/api/v1/authenticate/**").permitAll()
+//                .antMatchers("/api/v1/products").permitAll()
+                .antMatchers("/api/v1/products").hasAuthority("CLIENT")
                 .anyRequest()
                 .authenticated()
                 .and()

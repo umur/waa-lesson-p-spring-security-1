@@ -1,4 +1,4 @@
-package edu.miu.springsecurity1.model;
+package edu.miu.springsecurity1.entity.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
-    private String accessToken;
+public class RefreshTokenRequest {
     private String refreshToken;
 }

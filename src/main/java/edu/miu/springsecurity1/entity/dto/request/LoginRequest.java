@@ -1,4 +1,4 @@
-package edu.miu.springsecurity1.model;
+package edu.miu.springsecurity1.entity.dto.request;
 
 import lombok.Builder;
 import lombok.Data;

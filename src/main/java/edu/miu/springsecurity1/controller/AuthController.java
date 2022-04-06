@@ -1,20 +1,20 @@
 package edu.miu.springsecurity1.controller;
 
-import edu.miu.springsecurity1.model.LoginRequest;
-import edu.miu.springsecurity1.model.LoginResponse;
-import edu.miu.springsecurity1.model.RefreshTokenRequest;
+import edu.miu.springsecurity1.entity.dto.request.LoginRequest;
+import edu.miu.springsecurity1.entity.dto.response.LoginResponse;
+import edu.miu.springsecurity1.entity.dto.request.RefreshTokenRequest;
 import edu.miu.springsecurity1.service.UaaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/uaa")
+@RequestMapping("/api/v1/authenticate")
 @CrossOrigin
-public class UaaController {
+public class AuthController {
 
     private final UaaService uaaService;
 
-    public UaaController(UaaService uaaService) {
+    public AuthController(UaaService uaaService) {
         this.uaaService = uaaService;
     }
 

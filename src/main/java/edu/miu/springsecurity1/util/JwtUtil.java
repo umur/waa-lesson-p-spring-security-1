@@ -1,4 +1,4 @@
-package edu.miu.springsecurity1.security;
+package edu.miu.springsecurity1.util;
 
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Component
-public class JwtHelper {
+public class JwtUtil {
     private final String secret = "top-secret";
     private final long expirataion = 5 * 60 * 60 * 60;
     // private final long expirataion = 5;

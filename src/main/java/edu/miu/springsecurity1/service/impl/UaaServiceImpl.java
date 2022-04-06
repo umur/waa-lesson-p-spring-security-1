@@ -1,9 +1,9 @@
 package edu.miu.springsecurity1.service.impl;
 
-import edu.miu.springsecurity1.model.LoginRequest;
-import edu.miu.springsecurity1.model.LoginResponse;
-import edu.miu.springsecurity1.model.RefreshTokenRequest;
-import edu.miu.springsecurity1.security.JwtHelper;
+import edu.miu.springsecurity1.entity.dto.request.LoginRequest;
+import edu.miu.springsecurity1.entity.dto.response.LoginResponse;
+import edu.miu.springsecurity1.entity.dto.request.RefreshTokenRequest;
+import edu.miu.springsecurity1.util.JwtUtil;
 import edu.miu.springsecurity1.service.UaaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class UaaServiceImpl implements UaaService {
 
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
-    private final JwtHelper jwtHelper;
+    private final JwtUtil jwtHelper;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
