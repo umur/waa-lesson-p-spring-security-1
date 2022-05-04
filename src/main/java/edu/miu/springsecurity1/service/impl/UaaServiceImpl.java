@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +32,6 @@ public class UaaServiceImpl implements UaaService {
         } catch (BadCredentialsException e) {
             log.info("Bad Credentials");
         }
-
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(loginRequest.getEmail());
 
         final String accessToken = jwtHelper.generateToken(loginRequest.getEmail());
         final String refreshToken = jwtHelper.generateRefreshToken(loginRequest.getEmail());
