@@ -4,6 +4,7 @@ import edu.miu.springsecurity1.entity.Product;
 import edu.miu.springsecurity1.repository.ProductRepo;
 import edu.miu.springsecurity1.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findById(id).get();
     }
 
+    @PreAuthorize("hasRole('ROLE_GOLD')")
     public List<Product> getAll() {
         var result = new ArrayList<Product>();
         productRepo.findAll().forEach(result::add);

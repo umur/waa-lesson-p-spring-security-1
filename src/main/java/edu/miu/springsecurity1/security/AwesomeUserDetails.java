@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class AwesomeUserDetails implements UserDetails {
@@ -25,13 +26,20 @@ public class AwesomeUserDetails implements UserDetails {
         this.password = user.getPassword();
         this.roles = user.getRoles();
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+        var result= roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getRole().toUpperCase(Locale.ROOT)))
                 .collect(Collectors.toList());
+        return result;
     }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return roles.stream()
+//                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+//                .collect(Collectors.toList());
+//    }
 
     @Override
     public String getPassword() {
