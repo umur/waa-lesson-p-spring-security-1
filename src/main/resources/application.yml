@@ -1,9 +1,9 @@
 spring:
   application:
-    name: spring-security-demo-1
+    name: day3
   datasource:
-    password: 1
-    url: jdbc:postgresql://localhost:5432/spring-security-demo-1
+    password: sa
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
   jpa:
     hibernate:

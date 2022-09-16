@@ -47,11 +47,8 @@ public class SecurityConfiguration {
 //    }
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http,
-                                             BCryptPasswordEncoder bCryptPasswordEncoder,
-                                             UserDetailsService userDetailService)
+    public AuthenticationManager authManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailService)
             throws Exception {
-
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailService)
                 .passwordEncoder(bCryptPasswordEncoder)

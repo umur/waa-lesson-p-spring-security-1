@@ -1,6 +1,5 @@
 package edu.miu.springsecurity1.security;
 
-import edu.miu.springsecurity1.entity.User;
 import edu.miu.springsecurity1.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +20,7 @@ public class AwesomeUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(username);
-
+        var user = userRepo.findByEmail(username);
         var userDetails = new AwesomeUserDetails(user);
         return userDetails;
     }
